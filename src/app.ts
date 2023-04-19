@@ -1,13 +1,18 @@
 class Department {
+  static fiscalYear = 2023
   protected employees: string[] = []
 
   constructor(private readonly id: string, private name: string) {}
 
-  describe() {
+  static createEmployee(name: string): {} {
+    return { name }
+  }
+
+  describe(): void {
     console.log(`Department (${this.id}): + ${this.name}`)
   }
 
-  addEmployee(employee: string) {
+  addEmployee(employee: string): void {
     this.employees.push(employee)
   }
 
@@ -57,12 +62,6 @@ class ITDepartment extends Department {
   }
 }
 
-const accounting = new AccountingDepartment('d1', [])
-
-accounting.mostRecentReport = 'Deu Certo, é nois'
-console.log(accounting.mostRecentReport)
-
-accounting.getReport()
-
-accounting.addEmployee('Truta')
-accounting.printEmployeeInfo()
+const employee = Department.createEmployee('Tiago')
+console.log(employee)
+console.log(Department.fiscalYear)
