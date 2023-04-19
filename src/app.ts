@@ -3,7 +3,7 @@ interface Aged {
 }
 
 interface Named {
-  readonly name: string
+  readonly name?: string
 }
 
 interface Greetable extends Named, Aged {
@@ -11,11 +11,11 @@ interface Greetable extends Named, Aged {
 }
 
 class Person implements Greetable {
-  name: string
+  name?: string
   age = 30
 
-  constructor(n: string) {
-    this.name = n
+  constructor(n?: string) {
+    if (n) this.name = n
   }
 
   greet(phrase: string) {
@@ -25,6 +25,6 @@ class Person implements Greetable {
 
 let user1: Greetable
 
-user1 = new Person('Tiago')
+user1 = new Person()
 
 user1.greet('Olá')
