@@ -17,10 +17,45 @@ class Department {
   }
 }
 
-const accounting = new Department('d1', 'Accounting')
+class AccountingDepartment extends Department {
+  constructor(id: string, private reports: string[]) {
+    super(id, 'Accounting Department')
+  }
+
+  addReport(text: string) {
+    this.reports.push(text)
+  }
+
+  getReport() {
+    console.log(this.reports)
+  }
+}
+
+class ITDepartment extends Department {
+  constructor(id: string, public admins: string[]) {
+    super(id, 'IT')
+  }
+}
+
+const accounting = new AccountingDepartment('d1', [])
 
 accounting.describe()
 accounting.addEmployee('Mano')
 accounting.addEmployee('Truta')
 
+accounting.addReport('Foi tudo bem')
+accounting.getReport()
+
 accounting.printEmployeeInfo()
+
+const it = new ITDepartment('d2', ['Fi'])
+
+it.describe()
+it.addEmployee('Tiu')
+it.addEmployee('Lembe')
+
+it.printEmployeeInfo()
+
+console.log(Department)
+console.log(accounting)
+console.log(it)
