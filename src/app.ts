@@ -22,10 +22,17 @@ abstract class Department {
 
 class AccountingDepartment extends Department {
   private lastReport: string
+  private static instance: AccountingDepartment
 
-  constructor(id: string, private reports: string[]) {
+  private constructor(id: string, private reports: string[]) {
     super(id, 'Accounting Department')
     this.lastReport = reports[0]
+  }
+
+  static getInstance() {
+    if (AccountingDepartment.instance) return this.instance
+    this.instance = new AccountingDepartment('d2', [])
+    return this.instance
   }
 
   addReport(text: string) {
@@ -68,8 +75,10 @@ class ITDepartment extends Department {
   }
 }
 
-const accounting = new AccountingDepartment('d2', [])
+const accounting = AccountingDepartment.getInstance()
+const accounting2 = AccountingDepartment.getInstance()
 accounting.describe()
 
 const it = new ITDepartment('d1', ['Mano'])
 it.describe()
+console.log(accounting, accounting2)
